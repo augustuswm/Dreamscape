@@ -2,10 +2,16 @@ package com.unnamed.dreamscape;
 
 public class Level {
 	
-	private Tileset levelMap;
+	private Tileset levelTiles;
+	private Map levelMap;
 	
 	public Level (String fileMap) {
-		this.levelMap = new Tileset(fileMap, 64, 64);
+		this.levelTiles = new Tileset (fileMap, 32, 32);
+		this.levelMap = new Map ("0,1,2,3,4", 0, 4);
+	}
+	
+	public void render () {
+		this.levelMap.renderMap(this.levelTiles);
 	}
 	
 }

@@ -2,16 +2,17 @@ package com.unnamed.dreamscape;
 
 public class CollisionBox {
 	
-	private int x, y, width, height;
+	private int x, y, width, height, type;
 	
 	public CollisionBox () {
 	}
 	
-	public CollisionBox (int x, int y, int width, int height) {
+	public CollisionBox (int x, int y, int width, int height, int type) {
 		this.x = x;
 		this.y = y;
 		this.width = width;
 		this.height = height;
+		this.type = type;
 	}
 	
 	public void setX (int x) {
@@ -28,6 +29,10 @@ public class CollisionBox {
 	
 	public void setHeight (int height) {
 		this.height = height;
+	}
+	
+	public int getType () {
+		return this.type;
 	}
 	
 	public boolean colllides (CollisionBox entity) {

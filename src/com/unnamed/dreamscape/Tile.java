@@ -2,12 +2,12 @@ package com.unnamed.dreamscape;
 
 public class Tile {
 	
-	private int type;
+	private int graphic;
 	private CollisionBox box;
 	
-	public Tile (int x, int y, int width, int height, int type) {
-		this.box = new CollisionBox (x, y, width, height);
-		this.type = type;
+	public Tile (int x, int y, int width, int height, int type, int graphic) {
+		this.box = new CollisionBox (x, y, width, height, type);
+		this.graphic = graphic;
 	}
 	
 	public CollisionBox getBox () {
@@ -15,7 +15,7 @@ public class Tile {
 	}
 	
 	public int getType () {
-		return this.type;
+		return this.box.getType();
 	}
 	
 	public boolean render () {
