@@ -18,14 +18,15 @@ public class Tileset {
 	
 	public void renderTile (int x, int y, int unitWidth, int unitHeight, OrthographicCamera camera) {
 		
+		int displayWidth = this.width * unitWidth;
+		int displayHeight = this.height  * unitHeight;
+		
 		SpriteBatch mapTile = new SpriteBatch();
 		
 		mapTile.setProjectionMatrix(camera.combined);
 		
 		mapTile.begin();
-		//mapTile.draw(this.map, 0, 0, 1, 1, 0, 0,
-              //  this.map.getWidth(), this.map.getHeight(), false, false);
-		mapTile.draw(this.map, this.width * x, this.height * y, 1, 1, x + this.width*unitWidth, y + this.height*unitHeight, this.width*unitWidth, this.height*unitHeight, false, false);
+		mapTile.draw(this.map, x * this.width, y * this.height, displayWidth, displayHeight, x + displayWidth, y + displayHeight, displayWidth, displayHeight, false, false);
         mapTile.end();
 		
 	}

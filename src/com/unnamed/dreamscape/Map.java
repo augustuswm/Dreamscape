@@ -16,7 +16,7 @@ public class Map {
 		
 		for (int i = 0; i < width; i++) {
 			for (int j = 0; j < height; j++) {
-				this.tilePlacement[i][j] = Integer.parseInt(tiles[i*width + height]);
+				this.tilePlacement[i][j] = Integer.parseInt(tiles[i*height + j]);
 			}
 		}
 		

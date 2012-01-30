@@ -19,8 +19,7 @@ public class App implements ApplicationListener {
 
 	@Override
 	public void resize(int width, int height) {
-        float aspectRatio = (float) width / (float) height;
-        camera = new OrthographicCamera(2f * aspectRatio, 2f);
+        camera = new OrthographicCamera(width, height);
 	}
 
 	@Override

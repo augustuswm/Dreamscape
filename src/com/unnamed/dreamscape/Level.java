@@ -9,7 +9,7 @@ public class Level {
 	
 	public Level (String fileMap) {
 		this.levelTiles = new Tileset (fileMap, 32, 32);
-		this.levelMap = new Map ("0,1,2,3,4", 1, 4);
+		this.levelMap = new Map ("0,1,2,3,4,5", 2, 3);
 	}
 	
 	public void render (OrthographicCamera camera) {
