@@ -3,10 +3,14 @@ package com.unnamed.dreamscape;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL10;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class App implements ApplicationListener {
 	
 	private Level level;
+    private OrthographicCamera camera;
 	
 	@Override
 	public void create() {
@@ -15,14 +19,18 @@ public class App implements ApplicationListener {
 
 	@Override
 	public void resize(int width, int height) {
-		// TODO Auto-generated method stub
-
+        float aspectRatio = (float) width / (float) height;
+        camera = new OrthographicCamera(2f * aspectRatio, 2f);
 	}
 
 	@Override
 	public void render() {
-        Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
-        level.render();
+        camera.update();
+        camera.apply(Gdx.gl10);
+        
+		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
+        
+		level.render(camera);
 	}
 
 	@Override

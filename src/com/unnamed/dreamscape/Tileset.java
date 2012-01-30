@@ -1,6 +1,7 @@
 package com.unnamed.dreamscape;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
@@ -15,12 +16,16 @@ public class Tileset {
 		this.height = height;
 	}
 	
-	public void renderTile (int x, int y, int unitWidth, int unitHeight) {
+	public void renderTile (int x, int y, int unitWidth, int unitHeight, OrthographicCamera camera) {
 		
 		SpriteBatch mapTile = new SpriteBatch();
 		
+		mapTile.setProjectionMatrix(camera.combined);
+		
 		mapTile.begin();
-        mapTile.draw(this.map, this.width * x, this.height * y, 1, 1, x + this.width*unitWidth, y + this.height*unitHeight, this.width*unitWidth, this.height*unitHeight, false, false);
+		//mapTile.draw(this.map, 0, 0, 1, 1, 0, 0,
+              //  this.map.getWidth(), this.map.getHeight(), false, false);
+		mapTile.draw(this.map, this.width * x, this.height * y, 1, 1, x + this.width*unitWidth, y + this.height*unitHeight, this.width*unitWidth, this.height*unitHeight, false, false);
         mapTile.end();
 		
 	}
