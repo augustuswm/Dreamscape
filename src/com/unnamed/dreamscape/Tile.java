@@ -2,12 +2,10 @@ package com.unnamed.dreamscape;
 
 public class Tile {
 	
-	private int graphic;
 	private CollisionBox box;
 	
-	public Tile (int x, int y, int width, int height, int type, int graphic) {
+	public Tile (int x, int y, int width, int height, int type) {
 		this.box = new CollisionBox (x, y, width, height, type);
-		this.graphic = graphic;
 	}
 	
 	public CollisionBox getBox () {
