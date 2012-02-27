@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.Contact;
@@ -60,13 +61,10 @@ public class Player {
 		 */
 		PolygonShape playerShape = new PolygonShape();
 		playerShape.setAsBox(playerSprite.getWidth() / (2 * App.PIXELS_PER_METER),
+				playerSprite.getHeight() / (2 * App.PIXELS_PER_METER),new Vector2(0,0.05f),0);
+		PolygonShape feetFriction = new PolygonShape();
+		feetFriction.setAsBox(playerSprite.getWidth() / (2 * App.PIXELS_PER_METER) - 0.001f,
 				playerSprite.getHeight() / (2 * App.PIXELS_PER_METER));
-
-		EdgeShape playerBase = new EdgeShape();
-		playerBase.set( -1 * playerSprite.getWidth() / (2 * App.PIXELS_PER_METER) + 0.01f,
-						-1 * playerSprite.getHeight() / (2 * App.PIXELS_PER_METER),
-						playerSprite.getWidth() / (2 * App.PIXELS_PER_METER) - 0.01f,
-						-1 * playerSprite.getHeight() / (2 * App.PIXELS_PER_METER));
 		
 		/**
 		 * The character should not ever spin around on impact.
@@ -80,17 +78,19 @@ public class Player {
 		 */
 		FixtureDef playerFixtureDef = new FixtureDef();
 		playerFixtureDef.shape = playerShape;
-		playerFixtureDef.density = 1.0f;
-		playerFixtureDef.friction = 5.0f;
+		playerFixtureDef.density = 0.0f;
+		playerFixtureDef.friction = 0.0f;
 		
-		FixtureDef playerBaseFixtureDef = new FixtureDef();
-		playerBaseFixtureDef.shape = playerBase;
-		playerBaseFixtureDef.isSensor = true;
+		FixtureDef feetFixtureDef = new FixtureDef();
+		feetFixtureDef.shape = feetFriction;
+		feetFixtureDef.density = 1.0f;
+		feetFixtureDef.friction = 5.0f;
 
 		player.createFixture(playerFixtureDef);
-		player.createFixture(playerBaseFixtureDef);
+		player.createFixture(feetFixtureDef);
 		playerShape.dispose();
-		playerBase.dispose();
+		feetFriction.dispose();
+		
 	}
 	
 	public Body getBody() {
@@ -107,34 +107,6 @@ public class Player {
 	
 	public void setDirection(boolean dir) {
 		this.playerFacingRight = dir;
-	}
-
-	public class FootListener implements ContactListener {
-
-		@Override
-		public void beginContact(Contact contact) {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public void endContact(Contact contact) {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public void preSolve(Contact contact, Manifold oldManifold) {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public void postSolve(Contact contact, ContactImpulse impulse) {
-			// TODO Auto-generated method stub
-
-		}
-
 	}
 
 }

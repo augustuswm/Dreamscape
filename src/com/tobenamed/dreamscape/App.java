@@ -64,6 +64,8 @@ public class App implements ApplicationListener {
 	 */
 	private int screenWidth;
 	private int screenHeight;
+	
+	private float max_speed = 3.0f;
 
 	public App() {
 		super();
@@ -174,6 +176,8 @@ public class App implements ApplicationListener {
 
 	@Override
 	public void render() {
+		//System.out.println(player.getBody().getLinearVelocity());
+		
 		long now = System.nanoTime();
 
 		/**
@@ -186,25 +190,25 @@ public class App implements ApplicationListener {
 	
 		if (Gdx.input.isKeyPressed(Input.Keys.DPAD_RIGHT)) {
 			moveRight = true;
-		} else {
+		}/* else {
 			for (int i = 0; i < 2; i++) {
 				if (Gdx.input.isTouched(i)
 						&& Gdx.input.getX() > Gdx.graphics.getWidth() * 0.80f) {
 					moveRight = true;
 				}
 			}
-		}
+		}*/
 	
 		if (Gdx.input.isKeyPressed(Input.Keys.DPAD_LEFT)) {
 			moveLeft = true;
-		} else {
+		}/* else {
 			for (int i = 0; i < 2; i++) {
 				if (Gdx.input.isTouched(i)
 						&& Gdx.input.getX() < Gdx.graphics.getWidth() * 0.20f) {
 					moveLeft = true;
 				}
 			}
-		}
+		}*/
 	
 		if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
 			doJump = true;
@@ -227,16 +231,16 @@ public class App implements ApplicationListener {
 		 * 
 		 * The impulses are applied to the center of the jumper.
 		 */
-		if (moveRight) {
-			player.getBody().applyLinearImpulse(new Vector2(0.045f, 0.0f),
-					player.getBody().getWorldCenter());
+		if (moveRight && player.getBody().getLinearVelocity().x < max_speed) {
+			//player.getBody().setTransform(player.getBody().getPosition().x + 0.04f, player.getBody().getPosition().y, 0f);
+			player.getBody().applyLinearImpulse(new Vector2(0.05f, 0.0f), player.getBody().getWorldCenter());
 			if (player.direction() == false) {
 				player.getSprite().flip(true, false);
 			}
 			player.setDirection(true);
-		} else if (moveLeft) {
-			player.getBody().applyLinearImpulse(new Vector2(-0.045f, 0.0f),
-					player.getBody().getWorldCenter());
+		} else if (moveLeft && player.getBody().getLinearVelocity().x > -1*max_speed) {
+			//player.getBody().setTransform(player.getBody().getPosition().x - 0.04f, player.getBody().getPosition().y, 0f);
+			player.getBody().applyLinearImpulse(new Vector2(-0.05f, 0.0f),player.getBody().getWorldCenter());
 			if (player.direction() == true) {
 				player.getSprite().flip(true, false);
 			}
@@ -253,7 +257,7 @@ public class App implements ApplicationListener {
 		 * As before, impulse is applied to the center of the jumper.
 		 */
 		if (doJump && Math.abs(player.getBody().getLinearVelocity().y) < 1e-9) {
-			player.getBody().applyLinearImpulse(new Vector2(0.0f, 0.8f),
+			player.getBody().applyLinearImpulse(new Vector2(0.0f, 1.0f),
 					player.getBody().getWorldCenter());
 		}
 	
