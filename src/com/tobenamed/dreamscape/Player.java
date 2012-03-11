@@ -61,10 +61,10 @@ public class Player {
 		 */
 		PolygonShape playerShape = new PolygonShape();
 		playerShape.setAsBox(playerSprite.getWidth() / (2 * App.PIXELS_PER_METER),
-				playerSprite.getHeight() / (2 * App.PIXELS_PER_METER),new Vector2(0,0.05f),0);
-		PolygonShape feetFriction = new PolygonShape();
-		feetFriction.setAsBox(playerSprite.getWidth() / (2 * App.PIXELS_PER_METER) - 0.001f,
-				playerSprite.getHeight() / (2 * App.PIXELS_PER_METER));
+				playerSprite.getHeight() / (2 * App.PIXELS_PER_METER)/*,new Vector2(0,0.01f),0*/);
+		/*PolygonShape feetFriction = new PolygonShape();
+		feetFriction.setAsBox(playerSprite.getWidth() / (2 * App.PIXELS_PER_METER) - 0.05f,
+				playerSprite.getHeight() / (2 * App.PIXELS_PER_METER));*/
 		
 		/**
 		 * The character should not ever spin around on impact.
@@ -78,18 +78,18 @@ public class Player {
 		 */
 		FixtureDef playerFixtureDef = new FixtureDef();
 		playerFixtureDef.shape = playerShape;
-		playerFixtureDef.density = 0.0f;
+		playerFixtureDef.density = 1.0f;
 		playerFixtureDef.friction = 0.0f;
 		
-		FixtureDef feetFixtureDef = new FixtureDef();
+		/*FixtureDef feetFixtureDef = new FixtureDef();
 		feetFixtureDef.shape = feetFriction;
-		feetFixtureDef.density = 1.0f;
-		feetFixtureDef.friction = 5.0f;
+		feetFixtureDef.density = 1.5f;
+		feetFixtureDef.friction = 5.0f;*/
 
 		player.createFixture(playerFixtureDef);
-		player.createFixture(feetFixtureDef);
+		//player.createFixture(feetFixtureDef);
 		playerShape.dispose();
-		feetFriction.dispose();
+		//feetFriction.dispose();
 		
 	}
 	

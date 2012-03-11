@@ -231,20 +231,24 @@ public class App implements ApplicationListener {
 		 * 
 		 * The impulses are applied to the center of the jumper.
 		 */
-		if (moveRight && player.getBody().getLinearVelocity().x < max_speed) {
+		if (moveRight) {
 			//player.getBody().setTransform(player.getBody().getPosition().x + 0.04f, player.getBody().getPosition().y, 0f);
-			player.getBody().applyLinearImpulse(new Vector2(0.05f, 0.0f), player.getBody().getWorldCenter());
+			//player.getBody().applyLinearImpulse(new Vector2(0.05f, 0.0f), player.getBody().getWorldCenter());
+			player.getBody().setLinearVelocity(new Vector2(3.5f, player.getBody().getLinearVelocity().y));
 			if (player.direction() == false) {
 				player.getSprite().flip(true, false);
 			}
 			player.setDirection(true);
-		} else if (moveLeft && player.getBody().getLinearVelocity().x > -1*max_speed) {
+		} else if (moveLeft) {
 			//player.getBody().setTransform(player.getBody().getPosition().x - 0.04f, player.getBody().getPosition().y, 0f);
-			player.getBody().applyLinearImpulse(new Vector2(-0.05f, 0.0f),player.getBody().getWorldCenter());
+			//player.getBody().applyLinearImpulse(new Vector2(-0.05f, 0.0f),player.getBody().getWorldCenter());
+			player.getBody().setLinearVelocity(new Vector2(-3.5f, player.getBody().getLinearVelocity().y));
 			if (player.direction() == true) {
 				player.getSprite().flip(true, false);
 			}
 			player.setDirection(false);
+		} else if (Math.abs(player.getBody().getLinearVelocity().y) < 1e-9) {
+			player.getBody().setLinearVelocity(new Vector2(0.0f, player.getBody().getLinearVelocity().y));			
 		}
 	
 		/**
